@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form Results</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fjalla+One&family=Gabarito:wght@400..900&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fjalla+One&family=Gabarito:wght@400..900&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        
+        <div class="res" id="results">
+            <h1>FORM RESULTS</h1>
+            <div id="name"></div>
+            <div id="birthday"></div>
+            <div id="fruits"></div>
+        </div>
+
+        <script>
+            window.onload = function() {
+                const formData = JSON.parse(localStorage.getItem('formData'));
+
+                if (formData) {
+                    document.getElementById('name').innerHTML = `<strong>Name:</strong> ${formData.name} ${formData.middleName} ${formData.lastName}`;
+                    document.getElementById('birthday').innerHTML = `<strong>Birthday:</strong> ${formData.birthday}`;
+                    document.getElementById('fruits').innerHTML = `<strong>Favorite Fruits:</strong> ${formData.fruits.join(', ')}`;
+                } else {
+                    document.getElementById('results').innerHTML = 'No data found.';
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>List Box Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fjalla+One&family=Gabarito:wght@400..900&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">  
+    </head>
+    <body>
+        <form id="info">
+            <h1>INFORMATION</h1>
+            <h3>NAME</h3>
+            <div class="info-container">
+                <div class="input-group">
+                    <input type="text" id="name" name="name" placeholder="Juan" required>
+                    <label for="name">First Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="middle-name" name="middle-name" placeholder="Mendoza" required>
+                    <label for="middle-name">Middle Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="last-name" name="last-name" placeholder="Dela Cruz" required>
+                    <label for="last-name">Last Name</label>
+                </div>
+            </div>
+
+            <h3>BIRTHDAY</h3>
+            <div class="birthdate-container">
+                <div class="birthdate-dropdown">
+                    <div class="dropdown-container">
+                        <select id="month" name="month" required>
+                            <option value="">Select Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                        <label for="month">Month</label>
+                    </div>
+                    <div class="dropdown-container">
+                        <select id="day" name="day" required>
+                            <option value="">Select Day</option>
+                            <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                        </select>
+                        <label for="day">Day</label>
+                    </div>
+                    <div class="dropdown-container">
+                        <input type="text" id="year" name="year" required>
+                        <label for="year">Year</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <h3>Favorite Fruits</h3>
+                <button type="button" class="dropdown-btn" id="dropdownBtn">Select Fruits</button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <label><input type="checkbox" value="Apple">Apple</label>
+                    <label><input type="checkbox" value="Banana">Banana</label>
+                    <label><input type="checkbox" value="Strawberry">Strawberry</label>
+                    <label><input type="checkbox" value="Grape">Grape</label>
+                    <label><input type="checkbox" value="Orange">Orange</label>
+                    <label><input type="checkbox" value="Mango">Mango</label>
+                </div>
+            </div>
+
+            <div class="selected-items" id="selectedItems">
+                <strong>Selected Items:</strong> None
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                Please select at least two fruits.
+            </div>
+
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+
+        <script>
+            document.getElementById('dropdownBtn').addEventListener('click', function () {
+                document.querySelector('.dropdown').classList.toggle('open');
+            });
+
+            const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+            const selectedItemsDiv = document.getElementById('selectedItems');
+            const errorMessageDiv = document.getElementById('errorMessage');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedItems);
+            });
+
+            function updateSelectedItems() {
+                const selected = [];
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        selected.push(checkbox.value);
+                    }
+                });
+
+                if (selected.length >= 2) {
+                    errorMessageDiv.style.display = 'none';
+                } else {
+                    errorMessageDiv.style.display = 'block';
+                }
+
+                if (selected.length > 0) {
+                    selectedItemsDiv.innerHTML = '<strong>Selected Items:</strong> ' + selected.join(', ');
+                } else {
+                    selectedItemsDiv.innerHTML = '<strong>Selected Items:</strong> None';
+                }
+            }
+
+            function submitForm() {
+                const name = document.getElementById('name').value;
+                const middleName = document.getElementById('middle-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const month = document.getElementById('month').value;
+                const day = document.getElementById('day').value;
+                const year = document.getElementById('year').value;
+
+                const selectedFruits = [];
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        selectedFruits.push(checkbox.value);
+                    }
+                });
+
+                if (selectedFruits.length < 2) {
+                    errorMessageDiv.style.display = 'block';
+                } else {
+                    const formData = {
+                        name,
+                        middleName,
+                        lastName,
+                        birthday: `${month} ${day}, ${year}`,
+                        fruits: selectedFruits
+                    };
+                    localStorage.setItem('formData', JSON.stringify(formData));
+                    window.location.href = 'result.html';
+                }
+            }
+        </script>
+    </body>
+</html>
